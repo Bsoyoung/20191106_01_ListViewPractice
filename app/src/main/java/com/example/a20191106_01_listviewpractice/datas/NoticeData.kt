@@ -7,10 +7,11 @@ class NoticeData(title:String, content:String, writeDate:String) {
     var noticeTitle= title
     var noticeContent = content
     var date = writeDate
-    
+
+/*
     init {
         Log.d("제목",title)
     }
-
+*/
 
 }
