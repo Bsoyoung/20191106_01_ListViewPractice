@@ -1,5 +1,6 @@
 package com.example.a20191106_01_listviewpractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -22,7 +23,14 @@ class MainActivity : AppCompatActivity() {
         noticeListView.adapter = noticeAdapter
 
         noticeListView.setOnItemClickListener { parent, view, position, id ->
-            Toast.makeText(this,"${position} 번째 줄 클릭",Toast.LENGTH_SHORT).show()
+        //    Toast.makeText(this,"${position} 번째 줄 클릭",Toast.LENGTH_SHORT).show()
+        var noticeData = noticeList.get(position)
+
+
+        var intent = Intent(this,NoticeDetailActivity::class.java)
+        intent.putExtra("title",noticeData)
+        startActivity(intent)
+
         }
         noticeListView.setOnItemLongClickListener { parent, view, position, id ->
             Toast.makeText(this,"${position} 번째 줄 길게 클릭",Toast.LENGTH_SHORT).show()
