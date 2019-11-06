@@ -29,12 +29,15 @@ class NoticeAdapter(context:Context,res:Int,list:ArrayList<NoticeData>) : ArrayA
 //      tempRow가 null인 경우를 대비했으니, row에 tempRow는 절대 null이 아니라고 하면서 대입.
         var row = tempRow!!
 
+        //근거 데이터 변수 추출
         var data = mList.get(position)
 
+        //각 줄에서 데이터를 출력할 View 찾아오기
         var titleTxt = row.findViewById<TextView>(R.id.noticeTitle)
         var dateTxt = row.findViewById<TextView>(R.id.noticeDate)
         var contentTxt = row.findViewById<TextView>(R.id.noticeContent)
 
+        //View / Data를 연결
         titleTxt.text = data.noticeTitle
         dateTxt.text = data.date
         contentTxt.text = data.noticeContent
