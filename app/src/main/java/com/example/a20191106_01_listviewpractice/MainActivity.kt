@@ -17,25 +17,47 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setValues()
+        setupEvents()
+
+    }
+
+    fun setValues(){
         addNotices()
 
         noticeAdapter = NoticeAdapter(this,noticeList)
         noticeListView.adapter = noticeAdapter
+    }
+
+    fun setupEvents() {
+        addNoticeBtn.setOnClickListener {
+            noticeList.add(NoticeData("새 공지사항 ","적어봅니다","2019-11-06"))
+
+            //데이터 변경사항 => 리스트뷰에 반영
+
+            noticeAdapter?.notifyDataSetChanged()
+
+            //10칸 => 9번. 150칸 => 149칸
+            noticeListView.smoothScrollToPosition(noticeList.size - 1)
+        }
 
         noticeListView.setOnItemClickListener { parent, view, position, id ->
-        //    Toast.makeText(this,"${position} 번째 줄 클릭",Toast.LENGTH_SHORT).show()
-        var noticeData = noticeList.get(position)
+            //    Toast.makeText(this,"${position} 번째 줄 클릭",Toast.LENGTH_SHORT).show()
+            var noticeData = noticeList.get(position)
 
 
-        var intent = Intent(this,NoticeDetailActivity::class.java)
-        intent.putExtra("title",noticeData)
-        startActivity(intent)
+            var intent = Intent(this,NoticeDetailActivity::class.java)
+            intent.putExtra("title",noticeData)
+            startActivity(intent)
 
         }
         noticeListView.setOnItemLongClickListener { parent, view, position, id ->
             Toast.makeText(this,"${position} 번째 줄 길게 클릭",Toast.LENGTH_SHORT).show()
 
             return@setOnItemLongClickListener true
+        }
+        scrollToUp.setOnClickListener {
+            noticeListView.smoothScrollToPosition(0)
         }
 
     }
